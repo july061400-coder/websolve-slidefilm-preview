@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+<title>슬라이드 필름 제작 · 따뜻한 회상 무드 시안 v02</title>
+  <style>
+    :root { --ink:#111318; --ivory:#f7f4ee; --paper:#fffefa; --line:#d9d8d3; --mute:#6c6d6d; --accent:#d85b45; --light:#fff3d6; }
+    * { box-sizing:border-box; }
+    html { background:#e7e5df; }
+    body { margin:0; color:var(--ink); font-family:Inter,"Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+    .page { width:860px; margin:auto; overflow:hidden; background:var(--ivory); }
+    .section { position:relative; overflow:hidden; padding:100px 68px; }
+    .dark { color:var(--ivory); background:var(--ink); }
+    .eyebrow { display:flex; align-items:center; gap:16px; font-size:14px; line-height:1.4; font-weight:700; letter-spacing:.22em; text-transform:uppercase; }
+    .eyebrow:before { content:""; width:26px; height:2px; background:var(--accent); flex:none; }
+    .section-kicker { font-size:13px; letter-spacing:.2em; color:var(--accent); font-weight:700; }
+    h1,h2,h3,p { margin:0; }
+    h1 { font-size:67px; letter-spacing:-.075em; line-height:1.27; font-weight:750; word-break:keep-all; }
+    h2 { font-size:51px; letter-spacing:-.07em; line-height:1.35; font-weight:740; word-break:keep-all; }
+    h3 { font-size:30px; letter-spacing:-.055em; line-height:1.35; font-weight:700; }
+    p { word-break:keep-all; }
+    .lead { font-size:27px; line-height:1.72; letter-spacing:-.055em; }
+    .body { font-size:22px; line-height:1.75; letter-spacing:-.035em; }
+    .muted { color:var(--mute); }
+    .dark .muted { color:#b6b9b7; }
+    .thin-rule { height:1px; background:var(--line); }
+    .dark .thin-rule { background:#3e4246; }
+    .num { font-family:Georgia,serif; font-size:15px; letter-spacing:.12em; }
+    .chip { display:inline-block; padding:11px 14px; border:1px solid currentColor; font-size:12px; font-weight:700; letter-spacing:.14em; }
+    .slot { position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid #bbb9b0; background:linear-gradient(140deg,#efeee9,#e3e1d9); color:#6c6a64; }
+    .slot:before,.slot:after { content:""; position:absolute; width:56px; height:56px; border-color:#a2a097; }
+    .slot:before { top:16px; left:16px; border-left:1px solid; border-top:1px solid; }
+    .slot:after { bottom:16px; right:16px; border-right:1px solid; border-bottom:1px solid; }
+    .slot-inner { text-align:center; z-index:1; }
+    .slot-icon { width:36px; height:36px; margin:0 auto 18px; border:1px solid currentColor; border-radius:50%; display:grid; place-items:center; font-family:Georgia,serif; font-size:24px; font-weight:300; }
+    .slot-label { font-size:13px; font-weight:700; letter-spacing:.13em; }
+    .slot-note { margin-top:9px; font-size:12px; letter-spacing:-.02em; opacity:.75; }
+    .section-id { position:absolute; right:68px; top:108px; font-family:Georgia,serif; font-size:14px; opacity:.6; }
+
+    /* 01 / Hero */
+    .hero { height:1930px; background:radial-gradient(circle at 50% 67%,#373b3b 0%,#1b1e20 38%,#111318 70%); }
+    .hero-top { display:flex; align-items:center; justify-content:space-between; font-size:13px; font-weight:700; letter-spacing:.17em; }
+    .hero-top span:last-child { color:#979b9a; font-weight:500; }
+    .hero .eyebrow { margin-top:176px; color:#d8d9d5; }
+    .hero h1 { margin-top:42px; }
+    .hero h1 em { font-style:normal; color:var(--light); }
+    .hero .lead { margin-top:46px; max-width:710px; color:#c3c5c2; }
+    .hero-display { position:absolute; left:0; right:0; top:795px; height:860px; }
+    .hero-glow { position:absolute; left:50%; top:48%; width:640px; height:640px; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle,#fff9e5 0%,#ead9b4 13%,#73705d 30%,transparent 68%); filter:blur(40px); opacity:.48; }
+    .hero-film { position:absolute; top:105px; left:122px; width:616px; height:680px; padding:58px 38px; border:1px solid #a5a18d; background:linear-gradient(130deg,rgba(39,43,42,.96),rgba(11,14,16,.96)); transform:rotate(-5deg); box-shadow:30px 34px 80px #0009, inset 0 0 0 14px #171a1b; }
+    .hero-film:before,.hero-film:after { content:""; position:absolute; left:22px; right:22px; height:14px; background:repeating-linear-gradient(90deg,#bbb9aa 0 24px,transparent 24px 64px); opacity:.45; }
+    .hero-film:before { top:19px; }.hero-film:after { bottom:19px; }
+    .hero-film .slot { width:100%; height:100%; background:radial-gradient(circle at 50% 42%,#fff2d3,#acac9e 31%,#5d6769 68%,#3c4549); border-color:#c9bda0; color:#172125; }
+    .hero-film .slot:before,.hero-film .slot:after { border-color:#625c4f; }
+    .hero-film .slot-inner { padding:28px; background:#ffffffa8; border:1px solid #ffffff88; }
+    .hero-display-caption { position:absolute; top:760px; left:68px; right:68px; display:flex; justify-content:space-between; color:#adafa9; font-size:13px; letter-spacing:.12em; }
+    .hero-foot { position:absolute; left:68px; right:68px; bottom:98px; display:flex; justify-content:space-between; align-items:end; border-top:1px solid #575b5c; padding-top:24px; font-size:13px; color:#a9aba8; letter-spacing:.08em; }
+    .hero-foot strong { font-family:Georgia,serif; font-weight:400; font-size:34px; color:var(--ivory); }
+
+    /* 02 / Concept */
+    .concept { height:1960px; background:var(--ivory); }
+    .concept h2 { margin-top:60px; }
+    .concept h2 span { color:var(--accent); }
+    .concept .lead { margin-top:50px; }
+    .concept-difference { margin-top:132px; display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .difference-card { height:490px; padding:36px 30px; border:1px solid var(--line); background:#f1efe8; display:flex; flex-direction:column; }
+    .difference-card.active { background:#e4e9e7; border-color:#9ba9a8; }
+    .difference-card .mini { font-size:13px; letter-spacing:.16em; font-weight:700; }
+    .difference-card .sym { margin:auto 0 36px; height:140px; display:grid; place-items:center; }
+    .difference-card .paper-symbol { width:110px; height:132px; background:#fdfcf8; border:1px solid #cccac3; box-shadow:12px 12px 0 #dedbd2; }
+    .difference-card .film-symbol { width:150px; height:118px; border:14px solid #1d2429; outline:1px solid #798989; background:linear-gradient(145deg,#b2b8ad,#ffebc0 50%,#8a9694); box-shadow:0 0 40px #f7f1db; }
+    .difference-card h3 { margin-bottom:12px; }
+    .difference-card p { font-size:18px; line-height:1.55; }
+    .concept-quote { margin-top:130px; padding:48px 0 0; border-top:1px solid #c6c7c0; display:flex; align-items:start; gap:34px; }
+    .concept-quote span { font-family:Georgia,serif; font-size:100px; line-height:.8; color:var(--accent); }
+    .concept-quote p { font-size:38px; letter-spacing:-.06em; line-height:1.45; font-weight:650; }
+    .concept-bottom { position:absolute; left:68px; right:68px; bottom:98px; display:flex; justify-content:space-between; border-top:1px solid var(--line); padding-top:20px; font-size:14px; color:#777a76; letter-spacing:.05em; }
+
+    /* 03 / Transformation */
+    .transform { height:2240px; background:#e9eae5; }
+    .transform h2 { margin-top:55px; }
+    .transform .lead { margin-top:34px; }
+    .compare { margin-top:108px; display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+    .compare-col { min-width:0; }
+    .compare-meta { display:flex; justify-content:space-between; align-items:center; padding-bottom:16px; border-bottom:1px solid #b6b9b4; font-size:13px; font-weight:700; letter-spacing:.13em; }
+    .compare-frame { margin-top:25px; height:690px; padding:28px; background:#d7dcd8; border:1px solid #c2c9c4; }
+    .compare-frame:before { content:""; display:block; height:12px; margin:-28px -28px 25px; background:linear-gradient(90deg,#e9ece9,#c6d0cd); }
+    .compare-frame .slot { width:100%; height:570px; background:linear-gradient(150deg,#d9ddd9,#e9eeea); }
+    .compare-col.after .compare-frame { background:#252c2e; border-color:#252c2e; padding:44px 24px; }
+    .compare-col.after .compare-frame:before { margin:-44px -24px 27px; height:18px; background:repeating-linear-gradient(90deg,#d7d9cf 0 16px,#252c2e 16px 47px); }
+    .compare-col.after .slot { height:542px; border:1px solid #716b57; background:radial-gradient(circle,#fff1d0,#acb2aa 40%,#6f8587); color:#3c4340; }
+    .compare-bottom { margin-top:28px; display:flex; align-items:center; justify-content:space-between; font-size:20px; font-weight:650; letter-spacing:-.03em; }
+    .compare-bottom span { color:#8a8f8c; font-family:Georgia,serif; font-size:25px; font-weight:400; }
+    .transform-statement { position:absolute; left:68px; right:68px; bottom:118px; border-top:1px solid #b6b9b4; padding-top:54px; }
+    .transform-statement strong { display:block; font-family:Georgia,serif; font-size:96px; font-weight:400; letter-spacing:-.055em; line-height:1; }
+    .transform-statement p { margin-top:30px; font-size:24px; line-height:1.6; }
+
+    /* 04 / Light */
+    .light { height:2220px; background:radial-gradient(circle at 65% 49%,#3b3b35,#191c1e 65%,#111318); }
+    .light h2 { margin-top:55px; }
+    .light .lead { margin-top:35px; color:#b9bdbb; }
+    .light-stage { position:relative; height:1060px; margin-top:95px; }
+    .light-halo { position:absolute; width:660px; height:860px; top:60px; left:40px; background:radial-gradient(ellipse,#e7dfc1 0%,#9d9b8d 28%,#4c504d 54%,transparent 72%); opacity:.54; filter:blur(39px); }
+    .light-primary { position:absolute; left:84px; top:75px; width:555px; height:720px; padding:55px 42px; border:1px solid #8a8270; background:#14191b; transform:rotate(4deg); box-shadow:25px 35px 70px #0009; }
+    .light-primary .slot { width:100%; height:100%; background:linear-gradient(135deg,#bdc7bc,#f9ecd1 52%,#8a9e9a); border-color:#d4c5a6; }
+    .light-primary:before,.light-primary:after { content:""; position:absolute; left:10px; right:10px; height:18px; background:repeating-linear-gradient(90deg,#9f9e91 0 17px,transparent 17px 49px); opacity:.6; }
+    .light-primary:before { top:13px; }.light-primary:after { bottom:13px; }
+    .light-small { position:absolute; width:280px; height:340px; left:0; top:680px; transform:rotate(-9deg); border:8px solid #2e3333; box-shadow:15px 18px 30px #0007; }
+    .light-small.two { left:auto; right:0; top:725px; transform:rotate(11deg); }
+    .light-small .slot { width:100%; height:100%; background:#4b5454; color:#dad9cf; border:1px solid #888574; }
+    .light-small .slot-inner { transform:scale(.75); }
+    .light-caption { position:absolute; bottom:100px; left:68px; right:68px; padding-top:24px; border-top:1px solid #575b56; display:flex; justify-content:space-between; align-items:start; font-size:17px; line-height:1.6; color:#c5c8c3; }
+    .light-caption span:last-child { font-size:12px; letter-spacing:.16em; color:#90958f; }
+
+    /* 05 / Process */
+    .process { height:2550px; background:var(--paper); }
+    .process h2 { margin-top:60px; }
+    .process .lead { margin-top:40px; }
+    .process-path { position:relative; margin-top:130px; border-top:1px solid #bfc1bb; }
+    .process-step { min-height:310px; display:grid; grid-template-columns:115px 1fr 92px; align-items:center; border-bottom:1px solid #c8cac4; }
+    .process-step .step-num { font-family:Georgia,serif; font-size:58px; color:var(--accent); }
+    .process-step h3 { font-size:38px; }
+    .process-step p { margin-top:17px; font-size:20px; color:#6d706d; line-height:1.6; }
+    .process-step .step-mark { width:58px; height:58px; border:1px solid #aab0ad; border-radius:50%; display:grid; place-items:center; font-family:Georgia,serif; font-size:24px; color:#717b78; }
+    .process-footer { margin-top:90px; display:flex; gap:30px; align-items:start; }
+    .process-footer .big-arrow { font-family:Georgia,serif; font-size:110px; font-weight:400; line-height:.7; color:var(--accent); }
+    .process-footer p { font-size:30px; font-weight:650; line-height:1.5; letter-spacing:-.05em; }
+
+    /* 06 / Product */
+    .product { height:2350px; background:var(--ivory); }
+    .product h2 { margin-top:60px; }
+    .product .lead { margin-top:38px; }
+    .product-photo { display:grid; grid-template-columns:1.3fr .7fr; gap:20px; margin-top:100px; height:890px; }
+    .product-photo .slot { height:100%; }
+    .product-photo .smalls { display:grid; grid-template-rows:1fr 1fr; gap:20px; }
+    .product-photo .smalls .slot-inner { transform:scale(.8); }
+    .spec-title { margin-top:120px; font-size:14px; font-weight:700; letter-spacing:.15em; }
+    .spec-grid { margin-top:30px; border-top:1px solid #aeb1ac; }
+    .spec-row { display:grid; grid-template-columns:190px 1fr; gap:30px; padding:27px 0; border-bottom:1px solid #d0d2cc; font-size:23px; }
+    .spec-row span:first-child { color:#6c716f; }.spec-row span:last-child { color:#9a9d97; }
+    .spec-footnote { margin-top:28px; font-size:15px; color:#888c87; line-height:1.6; }
+
+    /* 07 / Order */
+    .order { height:2140px; background:#e8ece9; }
+    .order h2 { margin-top:60px; }
+    .order .lead { margin-top:40px; }
+    .order-flow { margin-top:135px; display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+    .order-card { position:relative; min-height:380px; padding:30px; border:1px solid #bbc5c0; background:#f8f9f5; display:flex; flex-direction:column; justify-content:space-between; }
+    .order-card.wide { grid-column:span 2; min-height:320px; background:#293334; color:#f8f8f2; }
+    .order-card .index { font-family:Georgia,serif; font-size:51px; color:var(--accent); }
+    .order-card h3 { font-size:31px; }
+    .order-card p { margin-top:15px; font-size:18px; line-height:1.5; color:#747d79; }
+    .order-card.wide p { color:#c1c7c2; }
+    .order-tip { margin-top:80px; padding-top:30px; border-top:1px solid #b3bcb7; font-size:20px; line-height:1.7; color:#505b56; }
+
+    /* 08 / Notice */
+    .notice { height:2280px; background:var(--paper); }
+    .notice h2 { margin-top:60px; }
+    .notice .lead { margin-top:38px; }
+    .notice-list { margin-top:110px; border-top:1px solid #adb1ac; }
+    .notice-item { display:grid; grid-template-columns:50px 1fr; gap:22px; padding:44px 0 49px; border-bottom:1px solid #d2d4cf; }
+    .notice-item .q { font-family:Georgia,serif; font-size:35px; color:var(--accent); }
+    .notice-item h3 { font-size:27px; }
+    .notice-item p { margin-top:18px; font-size:17px; line-height:1.65; color:#878b85; }
+    .notice-disclaimer { margin-top:100px; padding:50px; border:1px solid #cbd0c9; background:#f3f5f0; }
+    .notice-disclaimer .eyebrow { color:#555d56; }
+    .notice-disclaimer p { margin-top:24px; font-size:24px; line-height:1.6; font-weight:600; letter-spacing:-.04em; }
+
+    /* 09 / Closing */
+    .closing { height:1300px; background:radial-gradient(circle at 82% 62%,#47443b,#1a1d1e 54%,#111318); }
+    .closing .eyebrow { margin-top:135px; }
+    .closing h2 { margin-top:74px; font-size:68px; line-height:1.3; }
+    .closing .lead { margin-top:55px; color:#c7cbc5; }
+    .closing-visual { position:absolute; right:50px; bottom:115px; width:650px; height:330px; border:1px solid #a29e86; transform:rotate(-4deg); box-shadow:40px 40px 90px #000a; background:#111515; padding:34px 45px; }
+    .closing-visual:before,.closing-visual:after { content:""; position:absolute; left:10px; right:10px; height:12px; background:repeating-linear-gradient(90deg,#a2a393 0 20px,transparent 20px 55px); }
+    .closing-visual:before { top:9px; }.closing-visual:after { bottom:9px; }
+    .closing-visual .slot { width:100%; height:100%; background:radial-gradient(circle,#ffecc4,#a8aba0 42%,#576463 80%); border-color:#a3997f; }
+    .closing-bottom { position:absolute; left:68px; right:68px; bottom:48px; display:flex; justify-content:space-between; border-top:1px solid #555b59; padding-top:24px; font-size:12px; letter-spacing:.15em; color:#a8ada7; }
+
+    /* v02 — 기억을 다시 꺼내 보는 따뜻한 포토 아카이브 */
+    :root { --ink:#352820; --ivory:#fbf5e9; --paper:#fffbf4; --line:#ddcfbd; --mute:#766c60; --accent:#b56a4d; --light:#f9dba9; }
+    html { background:#e9dfd1; }
+    body { color:var(--ink); }
+    .page { background:var(--ivory); }
+    .section { padding-top:108px; }
+    h1,h2 { font-family:"AppleMyungjo","Noto Serif KR",Georgia,serif; font-weight:600; letter-spacing:-.055em; }
+    h1 { font-size:70px; line-height:1.38; }
+    h2 { font-size:54px; line-height:1.42; }
+    h3 { font-weight:650; }
+    .eyebrow { color:#8f5744; }
+    .eyebrow:before { width:32px; height:1px; }
+    .section-kicker { color:#a65e43; }
+    .slot { border-color:#cfbca6; background:linear-gradient(145deg,#f8ebd8,#ead7bd 50%,#f5e8d4); color:#7d6555; }
+    .slot:before,.slot:after { border-color:#b9a28a; }
+    .slot-icon { border-color:#aa8871; }
+    .slot-note { opacity:.78; }
+
+    .hero { color:var(--ink); background:radial-gradient(ellipse at 54% 65%,#fce6be 0%,#f4dfc0 26%,transparent 61%),linear-gradient(155deg,#fffaf1 0%,#f2e4d1 57%,#e8d2b9 100%); }
+    .hero:before { content:""; position:absolute; inset:20px; border:1px solid #b79c7c55; pointer-events:none; }
+    .hero-top { border-bottom:1px solid #bcae9d; padding-bottom:22px; color:#6c5647; }
+    .hero-top span:last-child { color:#947968; }
+    .hero .eyebrow { margin-top:148px; color:#985d46; }
+    .hero h1 { margin-top:55px; color:#403026; }
+    .hero h1 em { color:#a05b40; }
+    .hero .lead { margin-top:48px; color:#705b4d; line-height:1.77; }
+    .hero-glow { width:720px; height:730px; background:radial-gradient(circle,#fffefa 0%,#fff1d6 19%,#f5c792 39%,transparent 72%); filter:blur(42px); opacity:.8; }
+    .hero-film { top:122px; left:147px; width:565px; height:650px; border-color:#9e755d; background:linear-gradient(130deg,#664939,#3d3029); transform:rotate(-4deg); box-shadow:21px 37px 70px #8b5f3d55,inset 0 0 0 14px #50392e; }
+    .hero-film:before,.hero-film:after { background:repeating-linear-gradient(90deg,#ead8c0 0 24px,transparent 24px 64px); }
+    .hero-film .slot { background:radial-gradient(circle at 50% 38%,#fff9e8,#f7dbaf 34%,#c69e78 72%,#a67b60); border-color:#e9ca9f; color:#6f4d3b; }
+    .hero-film .slot-inner { padding:32px 24px; background:#fffaf0c9; border:1px solid #fffaf0cc; }
+    .hero-display-caption { top:818px; color:#8b6955; }
+    .hero-foot { border-color:#a9937b; color:#705b4d; }
+    .hero-foot strong { color:#a05b40; }
+
+    .concept { background:#fffaf1; }
+    .concept h2 span { color:#a75d43; }
+    .difference-card { background:#f8efe2; border-color:#dccbb8; }
+    .difference-card.active { background:#fae3cc; border-color:#c79d7c; }
+    .difference-card .paper-symbol { background:#fffdf7; border-color:#d1c3b4; box-shadow:12px 12px 0 #e6d8c6; }
+    .difference-card .film-symbol { border-color:#674d3e; outline-color:#a88970; background:linear-gradient(145deg,#e5bc99,#fff5d8 52%,#d69e78); box-shadow:0 0 42px #ecc296; }
+    .concept-quote { border-color:#d3c0a8; }
+    .concept-quote span { color:#af6547; }
+    .concept-bottom { border-color:#dfd0be; color:#8c7565; }
+
+    .transform { background:linear-gradient(155deg,#f9f0e2,#f1e1cb 60%,#f6eadb); }
+    .compare-meta,.transform-statement { border-color:#c8b39b; }
+    .compare-frame { background:#e7d5c0; border-color:#cfbaa3; }
+    .compare-frame:before { background:linear-gradient(90deg,#f8eddb,#d9bfa4); }
+    .compare-frame .slot { background:linear-gradient(145deg,#f8ead7,#e9d3b7); }
+    .compare-col.after .compare-frame { background:#674d3e; border-color:#674d3e; }
+    .compare-col.after .compare-frame:before { background:repeating-linear-gradient(90deg,#ead4b7 0 16px,#674d3e 16px 47px); }
+    .compare-col.after .slot { border-color:#e1b98d; background:radial-gradient(circle,#fff6df,#eecb9e 44%,#b88868); color:#684936; }
+    .transform-statement strong { color:#9b6149; }
+    .transform-statement p { color:#6e584a; }
+
+    .light { color:#fff9ec; background:radial-gradient(ellipse at 50% 48%,#b88d69 0%,#86664f 45%,#5d4739 78%,#4d3b32); }
+    .light .section-kicker { color:#f4c392; }
+    .light .lead { color:#f7e5d2; }
+    .light-halo { background:radial-gradient(ellipse,#fff8df 0%,#f4d1a1 30%,#ab805e 56%,transparent 73%); opacity:.72; }
+    .light-primary { background:#674a3a; border-color:#e1b88e; box-shadow:25px 35px 70px #33221977; }
+    .light-primary .slot { background:linear-gradient(140deg,#fff5df,#f2d4a8 50%,#ba8968); border-color:#f3d2a9; }
+    .light-primary:before,.light-primary:after { background:repeating-linear-gradient(90deg,#f4d6b4 0 17px,transparent 17px 49px); }
+    .light-small { border-color:#664a3a; box-shadow:15px 18px 30px #33221966; }
+    .light-small .slot { background:#d4ae88; border-color:#f4d3ad; color:#684936; }
+    .light-caption { border-color:#dfc2a5; color:#fff3e4; }
+    .light-caption span:last-child { color:#ecd5bd; }
+
+    .process { background:#fffaf1; }
+    .process-path { border-color:#cdb69e; }
+    .process-step { border-color:#dfccb6; }
+    .process-step .step-num { color:#b36c4d; }
+    .process-step p { color:#806d5d; }
+    .process-step .step-mark { border-color:#c8a98c; color:#a66b4e; }
+    .process-footer .big-arrow { color:#b36c4d; }
+
+    .product { background:#f8ecdc; }
+    .product-photo .slot { background:linear-gradient(145deg,#f9ead5,#e7c8a8); }
+    .spec-grid { border-color:#c9ae92; }
+    .spec-row { border-color:#ddc7ae; }
+    .spec-row span:first-child { color:#785d4c; }
+    .spec-row span:last-child { color:#a28771; }
+    .spec-footnote { color:#846e5d; }
+
+    .order { background:#f2e0ca; }
+    .order-card { background:#fff9ef; border-color:#d4b99b; }
+    .order-card.wide { background:#795941; color:#fff9ed; }
+    .order-card .index { color:#b86d4b; }
+    .order-card.wide .index { color:#f3c79f; }
+    .order-card p { color:#806e60; }
+    .order-card.wide p { color:#f0dcc7; }
+    .order-tip { border-color:#c9ad90; color:#6e5848; }
+
+    .notice { background:#fffbf4; }
+    .notice-list { border-color:#c6ab8d; }
+    .notice-item { border-color:#e0ccb6; }
+    .notice-item .q { color:#b36c4d; }
+    .notice-item p { color:#8a7462; }
+    .notice-disclaimer { border-color:#d6bda2; background:#f8e9d7; }
+    .notice-disclaimer .eyebrow { color:#8c5e45; }
+
+    .closing { background:radial-gradient(ellipse at 72% 65%,#c3966f 0%,#9a7155 39%,#6c4e3d 79%,#594133); color:#fff9ec; }
+    .closing .eyebrow { color:#f6d8b5; }
+    .closing .lead { color:#f8e9d7; }
+    .closing-visual { background:#6c4d3c; border-color:#e9c9a3; box-shadow:30px 35px 80px #3a261d88; }
+    .closing-visual:before,.closing-visual:after { background:repeating-linear-gradient(90deg,#f4d4aa 0 20px,transparent 20px 55px); }
+    .closing-visual .slot { border-color:#f3d8b7; background:radial-gradient(circle,#fff9e7,#edc899 46%,#ba8c6a); color:#73523c; }
+    .closing-bottom { border-color:#e2bda0; color:#f2dcc8; }
+
+    @media(max-width:860px){ .page { margin:0; } }
+    @media print { html { background:white; } .page { margin:0; } }
+  </style>
+</head>
+<body>
+<main class="page" aria-label="슬라이드 필름 상세페이지 1차 디자인 시안">
+  <section class="section dark hero">
+    <div class="hero-top"><span>THE PHOTO ARCHIVE</span><span>ONE SCENE, ANOTHER FORM</span></div>
+    <div class="eyebrow">A SCENE WORTH KEEPING</div>
+    <h1>디지털 사진을,<br><em>진짜 슬라이드<br>필름으로.</em></h1>
+    <p class="lead">화면 속에 머물던 장면을 실제 필름에 기록합니다.<br>아날로그 현상을 거쳐, 손에 남는<br>필름 스트립으로 전해드립니다.</p>
+    <div class="hero-display" aria-hidden="true"><div class="hero-glow"></div><div class="hero-film"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">HERO IMAGE / 01</div><div class="slot-note">최종 제품 촬영본 적용 예정</div></div></div></div><div class="hero-display-caption"><span>THE MOMENT, HELD IN LIGHT</span><span>01 / ARCHIVE</span></div></div>
+    <div class="hero-foot"><span>다시 꺼내 보고 싶은 장면을 위한, 새로운 형태</span><strong>01 / 09</strong></div>
+  </section>
+
+  <section class="section concept">
+    <div class="section-kicker">01 — A DIFFERENT WAY TO KEEP</div><div class="section-id">02 / 09</div>
+    <h2>프린트가 아닙니다.<br><span>당신의 장면을</span><br>실제 필름에 기록합니다.</h2>
+    <p class="lead muted">종이에 인쇄하는 방식과는 다릅니다.<br>보내주신 이미지를 슬라이드 필름에 기록하고<br>아날로그 현상으로 완성합니다.</p>
+    <div class="concept-difference">
+      <div class="difference-card"><div class="mini">01 / PRINT</div><div class="sym"><div class="paper-symbol"></div></div><h3>종이에 인쇄하는 사진</h3><p>이미지를 종이 표면에<br>인쇄한 형태입니다.</p></div>
+      <div class="difference-card active"><div class="mini">02 / FILM</div><div class="sym"><div class="film-symbol"></div></div><h3>필름에 기록하는 사진</h3><p>실제 슬라이드 필름에<br>이미지를 기록하는 방식입니다.</p></div>
+    </div>
+    <div class="concept-quote"><span>“</span><p>늘 보던 사진을,<br>다시 꺼내 보고 싶은 장면으로.</p></div>
+    <div class="concept-bottom"><span>INPUT / DIGITAL IMAGE FILE</span><span>OUTPUT / PHYSICAL SLIDE FILM</span></div>
+  </section>
+
+  <section class="section transform">
+    <div class="section-kicker">02 — FROM SCREEN TO HAND</div><div class="section-id">03 / 09</div>
+    <h2>화면 속에만 있던 사진이,<br>손에 잡히는 필름으로.</h2>
+    <p class="lead muted">내가 고른 한 장면이<br>파일에서 실물 필름이 되는 과정.</p>
+    <div class="compare">
+      <div class="compare-col"><div class="compare-meta"><span>01 / DIGITAL</span><span>IMAGE FILE</span></div><div class="compare-frame"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">디지털 원본 이미지</div><div class="slot-note">고객 비교 사진 삽입</div></div></div></div><div class="compare-bottom">화면 속 이미지 <span>→</span></div></div>
+      <div class="compare-col after"><div class="compare-meta"><span>02 / PHYSICAL</span><span>SLIDE FILM</span></div><div class="compare-frame"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">실물 필름 사진</div><div class="slot-note">동일 이미지의 결과물 삽입</div></div></div></div><div class="compare-bottom">손에 남는 필름 <span>↗</span></div></div>
+    </div>
+    <div class="transform-statement"><strong>FILE → FILM</strong><p>같은 사진을, 다른 방식으로 다시 만납니다.<br>최종 촬영본으로 전후 장면을 이어 보여드릴 예정입니다.</p></div>
+  </section>
+
+  <section class="section dark light">
+    <div class="section-kicker">03 — A MOMENT IN THE LIGHT</div><div class="section-id">04 / 09</div>
+    <h2>빛을 만나는 순간,<br>장면이 다시 떠오릅니다.</h2>
+    <p class="lead">빛을 통과해 보이는 슬라이드 필름의 이미지.<br>실제 촬영본으로 그 모습을 가장 크게 보여드릴 공간입니다.</p>
+    <div class="light-stage" aria-hidden="true"><div class="light-halo"></div><div class="light-primary"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">메인 투과광 촬영본</div><div class="slot-note">고객 촬영본 반영 예정</div></div></div></div><div class="light-small"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">디테일 컷 01</div></div></div></div><div class="light-small two"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">디테일 컷 02</div></div></div></div></div>
+    <div class="light-caption"><span>빛과 필름, 그리고 한 장면.<br>최종 촬영본의 투과광과 디테일을 이곳에 담습니다.</span><span>IMAGE SLOTS / 01–03</span></div>
+  </section>
+
+  <section class="section process">
+    <div class="section-kicker">04 — MADE FOR YOUR SCENE</div><div class="section-id">05 / 09</div>
+    <h2>보내주신 사진이,<br>필름이 되어 돌아오기까지.</h2>
+    <p class="lead muted">하나의 이미지를 받는 순간부터<br>실물 필름을 전해드리는 순간까지.</p>
+    <div class="process-path">
+      <div class="process-step"><div class="step-num">01</div><div><h3>이미지 접수</h3><p>제작할 디지털 이미지 파일을 받습니다.</p></div><div class="step-mark">↗</div></div>
+      <div class="process-step"><div class="step-num">02</div><div><h3>필름 제작</h3><p>이미지를 실제 슬라이드 필름에 기록합니다.</p></div><div class="step-mark">□</div></div>
+      <div class="process-step"><div class="step-num">03</div><div><h3>아날로그 현상</h3><p>필름을 아날로그 현상 공정으로 완성합니다.</p></div><div class="step-mark">◌</div></div>
+      <div class="process-step"><div class="step-num">04</div><div><h3>결과물 검수</h3><p>완성된 실물 결과물을 확인합니다.</p></div><div class="step-mark">✓</div></div>
+      <div class="process-step"><div class="step-num">05</div><div><h3>안전 포장·배송</h3><p>완성된 필름을 포장해 전달합니다.</p></div><div class="step-mark">→</div></div>
+    </div>
+    <div class="process-footer"><span class="big-arrow">↗</span><p>화면에서 시작한 사진이<br>손에 남는 필름이 됩니다.</p></div>
+  </section>
+
+  <section class="section product">
+    <div class="section-kicker">05 — YOUR SCENE, ON FILM</div><div class="section-id">06 / 09</div>
+    <h2>내가 고른 그 장면을,<br>실제 슬라이드 필름으로.</h2>
+    <p class="lead muted">간직하고 싶은 사진을 골라주세요.<br>필름의 실제 모습과 디테일은 최종 촬영본으로 보여드립니다.</p>
+    <div class="product-photo"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 메인 사진</div><div class="slot-note">최종 고해상도 촬영본 교체</div></div></div><div class="smalls"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 디테일 01</div></div></div><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 디테일 02</div></div></div></div></div>
+    <div class="spec-title">PRODUCT INFORMATION / FINAL DATA PENDING</div>
+    <div class="spec-grid"><div class="spec-row"><span>제품 구성</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>규격 · 컷 수</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>선택 옵션</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>가격 안내</span><span>고객 자료 수령 후 기입</span></div></div>
+    <p class="spec-footnote">※ 위 정보 영역은 상품 정보가 확인된 후 실제 내용으로 교체됩니다.</p>
+  </section>
+
+  <section class="section order">
+    <div class="section-kicker">06 — FROM YOUR PHOTO TO DELIVERY</div><div class="section-id">07 / 09</div>
+    <h2>사진을 고르는 순간부터,<br>필름을 받아보는 순간까지.</h2>
+    <p class="lead muted">준비부터 배송까지 이어지는 흐름을<br>차근차근 안내합니다.</p>
+    <div class="order-flow">
+      <div class="order-card"><div class="index">01</div><div><h3>옵션 선택</h3><p>구매할 상품 옵션을 선택합니다.</p></div></div>
+      <div class="order-card"><div class="index">02</div><div><h3>이미지 준비</h3><p>필름으로 남길 이미지 파일을 준비합니다.</p></div></div>
+      <div class="order-card"><div class="index">03</div><div><h3>파일 전달</h3><p>안내된 방법에 따라 이미지를 전달합니다.</p></div></div>
+      <div class="order-card"><div class="index">04</div><div><h3>제작·현상</h3><p>이미지가 실제 필름으로 제작됩니다.</p></div></div>
+      <div class="order-card wide"><div class="index">05</div><div><h3>완성품 배송</h3><p>검수 후 실물 필름을 안전하게 포장해 전달합니다.</p></div></div>
+    </div>
+    <p class="order-tip">정확한 파일 전달 채널·규격은 고객 안내를 받은 뒤 이 섹션에 반영합니다.</p>
+  </section>
+
+  <section class="section notice">
+    <div class="section-kicker">07 — A NOTE BEFORE YOU BEGIN</div><div class="section-id">08 / 09</div>
+    <h2>좋은 시작을 위해,<br>주문 전 확인해주세요.</h2>
+    <p class="lead muted">사진을 보내기 전에 알아두면 좋은 내용을<br>한곳에 모았습니다.</p>
+    <div class="notice-list">
+      <div class="notice-item"><span class="q">Q.</span><div><h3>어떤 이미지 파일을 보낼 수 있나요?</h3><p>최종 파일 형식·권장 규격 확인 후 답변 기입</p></div></div>
+      <div class="notice-item"><span class="q">Q.</span><div><h3>이미지는 어디로 전달하나요?</h3><p>최종 접수 채널과 전송 방법 확인 후 답변 기입</p></div></div>
+      <div class="notice-item"><span class="q">Q.</span><div><h3>상품 구성과 옵션은 어떻게 되나요?</h3><p>최종 구성·옵션 자료 확인 후 답변 기입</p></div></div>
+      <div class="notice-item"><span class="q">Q.</span><div><h3>주문 전 알아둘 점은 무엇인가요?</h3><p>고객이 제공한 제작·배송·교환 안내 확인 후 답변 기입</p></div></div>
+      <div class="notice-item"><span class="q">Q.</span><div><h3>결과물은 어떻게 받아보나요?</h3><p>최종 배송 안내 확인 후 답변 기입</p></div></div>
+    </div>
+    <div class="notice-disclaimer"><div class="eyebrow">NOTICE</div><p>파일 전달·상품 구성·배송 안내는<br>확인된 정보만 정확하게 담겠습니다.</p></div>
+  </section>
+
+  <section class="section dark closing">
+    <div class="eyebrow">FOR THE MOMENTS YOU RETURN TO</div>
+    <h2>다시 꺼내 보고 싶은 그 장면을,<br>화면 밖에 남겨보세요.</h2>
+    <p class="lead">한 장의 디지털 사진이, 손에 남는 필름이 되는 경험.</p>
+    <div class="closing-visual" aria-hidden="true"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">최종 클로징 사진</div><div class="slot-note">고객 촬영본 수령 후 반영</div></div></div></div>
+    <div class="closing-bottom"><span>SLIDE FILM SERVICE</span><span>END / 09</span></div>
+  </section>
+</main>
+<script>
+  // 스마트스토어의 상세 이미지처럼 860px 원본을 작은 화면에 맞춰 축소해서 보여준다.
+  function fitPreview() {
+    document.querySelector('.page').style.zoom = Math.min(1, window.innerWidth / 860);
+  }
+  fitPreview();
+  window.addEventListener('resize', fitPreview);
+</script>
+</body>
+</html>
