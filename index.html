@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-<title>슬라이드 필름 제작 · 고객 검토용 디자인 시안 v04</title>
+<title>슬라이드 필름 제작 · 고객 검토용 디자인 시안 v05</title>
   <style>
     :root { --ink:#111318; --ivory:#f7f4ee; --paper:#fffefa; --line:#d9d8d3; --mute:#6c6d6d; --accent:#d85b45; --light:#fff3d6; }
     * { box-sizing:border-box; }
@@ -392,6 +392,45 @@
     .order-card.wide:after { content:"✓"; }
     .order-tip { margin-top:50px; }
 
+    /* v05 — 정보 역할을 분리하고 스마트스토어 구매 판단 흐름을 선명하게 한다. */
+    .hero-top { position:relative; z-index:4; }
+    .hero h1 { max-width:690px; }
+    .hero .lead { max-width:680px; }
+    .hero-display-caption { top:755px; font-size:18px; font-weight:700; }
+    .concept { height:1780px; }
+    .concept .lead { max-width:670px; }
+    .concept-difference { position:relative; margin-top:80px; }
+    .concept-difference:after { content:"→"; position:absolute; left:50%; top:44%; transform:translate(-50%,-50%); display:grid; place-items:center; width:78px; height:78px; border:1px solid #e5b68e; border-radius:50%; background:#684937; color:#fff0da; font-family:Georgia,serif; font-size:46px; box-shadow:0 12px 24px #3e2a2155; }
+    .difference-card { height:440px; }
+    .difference-card h3 { font-size:29px; }
+    .difference-card p { font-size:23px; }
+    .concept-quote { margin-top:82px; }
+    .concept-quote p { font-size:39px; }
+    .transform { height:1940px; }
+    .transform-statement strong { font-size:78px; line-height:1.08; }
+    .light { height:2090px; }
+    .light .lead { max-width:680px; }
+    .light-caption span:first-child { max-width:490px; }
+    .product { height:2260px; background:linear-gradient(160deg,#fffaf1 0%,#f8ebdc 100%); }
+    .product-photo { margin-top:72px; }
+    .spec-title { color:#9e6247; }
+    .spec-row span:last-child { color:#806b5b; }
+    .process { height:2360px; background:#fff9ef; }
+    .process-step:nth-child(odd) .step-num { color:#9b563d; }
+    .process-footer { padding-top:35px; border-top:1px solid #d8c8b6; }
+    .order { height:1710px; background:linear-gradient(150deg,#f0dfc7,#e8d2ba 70%,#dfbb99); }
+    .order .lead { max-width:660px; }
+    .order-flow { margin-top:80px; }
+    .order-card { min-height:245px; }
+    .order-card h3 { font-size:36px; }
+    .order-card p { max-width:515px; }
+    .order-tip { max-width:690px; font-size:24px; }
+    .notice { height:1740px; }
+    .notice-item { padding:48px 0 52px; }
+    .notice-disclaimer { margin-top:78px; }
+    .closing h2 { max-width:700px; }
+    .closing .lead { max-width:670px; }
+
     @media(max-width:860px){ .page { margin:0; } }
     @media print { html { background:white; } .page { margin:0; } }
   </style>
@@ -402,7 +441,7 @@
     <div class="hero-top"><span>THE PHOTO ARCHIVE</span><span>ONE SCENE, ANOTHER FORM</span></div>
     <div class="eyebrow">A SCENE WORTH KEEPING</div>
     <h1>사진 파일을,<br><em>실제 슬라이드<br>필름으로.</em></h1>
-    <p class="lead">보내주신 사진을 실제 슬라이드 필름에 기록합니다.<br>아날로그 현상을 거쳐 실물 필름으로 전해드립니다.</p>
+    <p class="lead">휴대폰 속에만 있던 장면을 꺼내<br>실제 필름에 기록하고, 현상해 전해드립니다.</p>
     <div class="hero-display" aria-hidden="true">
       <div class="hero-glow"></div>
       <div class="hero-input"><div class="hero-input-head"><span>01 / FILE</span><span>YOUR PHOTO</span></div><div class="hero-input-screen"><span>보내주신 사진 파일</span></div><div class="hero-input-foot"><span>디지털 이미지</span><span>→</span></div></div>
@@ -415,39 +454,49 @@
 
   <section class="section concept">
     <div class="section-kicker">01 — A DIFFERENT WAY TO KEEP</div><div class="section-id">02 / 09</div>
-    <h2>종이에 인쇄하지 않고,<br><span>실제 슬라이드 필름에</span><br>사진을 기록합니다.</h2>
-    <p class="lead muted">일반적인 사진 인화와 무엇이 다를까요?<br>이미지를 실물 필름에 기록하고 현상해<br>필름 자체를 결과물로 전해드립니다.</p>
+    <h2>종이 위의 사진이 아닌,<br><span>사진이 담긴 필름을</span><br>받아보는 방식.</h2>
+    <p class="lead muted">같은 이미지를 보내더라도 결과물은 다릅니다.<br>이 서비스는 종이에 인쇄한 사진 대신<br>기록과 현상을 거친 실물 슬라이드 필름을 전합니다.</p>
     <div class="concept-difference">
-      <div class="difference-card"><div class="mini">01 / PRINT</div><div class="sym"><div class="paper-symbol"></div></div><h3>종이에 인쇄하는 사진</h3><p>이미지를 종이 표면에<br>인쇄한 형태입니다.</p></div>
-      <div class="difference-card active"><div class="mini">02 / FILM</div><div class="sym"><div class="film-symbol"></div></div><h3>필름에 기록하는 사진</h3><p>실제 슬라이드 필름에<br>이미지를 기록하는 방식입니다.</p></div>
+      <div class="difference-card"><div class="mini">01 / PAPER PRINT</div><div class="sym"><div class="paper-symbol"></div></div><h3>일반 사진 인화</h3><p>사진을 종이 위에<br>인쇄해 받아봅니다.</p></div>
+      <div class="difference-card active"><div class="mini">02 / SLIDE FILM</div><div class="sym"><div class="film-symbol"></div></div><h3>슬라이드 필름 제작</h3><p>이미지를 필름에 기록·현상해<br>실물 필름으로 받아봅니다.</p></div>
     </div>
-    <div class="concept-quote"><span>“</span><p>같은 사진도, 무엇에 남기느냐에 따라<br>다르게 마주하게 됩니다.</p></div>
+    <div class="concept-quote"><span>“</span><p>사진 한 장의 이야기를,<br>다른 형태로 간직해 보세요.</p></div>
     <div class="concept-bottom"><span>INPUT / DIGITAL IMAGE FILE</span><span>OUTPUT / PHYSICAL SLIDE FILM</span></div>
   </section>
 
   <section class="section transform">
     <div class="section-kicker">02 — FROM SCREEN TO HAND</div><div class="section-id">03 / 09</div>
     <h2>파일로 보낸 사진을,<br>필름으로 받아보세요.</h2>
-    <p class="lead muted">화면에서 보던 이미지가 실물 필름이 되면<br>어떤 모습인지 나란히 비교해 보세요.</p>
+    <p class="lead muted">한 장의 사진이 어떤 형태로 바뀌는지<br>디지털 원본과 완성된 필름을 나란히 보여드립니다.</p>
     <div class="compare">
       <div class="compare-col"><div class="compare-meta"><span>01 / DIGITAL</span><span>IMAGE FILE</span></div><div class="compare-frame"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">디지털 원본 이미지</div><div class="slot-note">고객 비교 사진 삽입</div></div></div></div><div class="compare-bottom">화면 속 이미지 <span>→</span></div></div>
       <div class="compare-col after"><div class="compare-meta"><span>02 / PHYSICAL</span><span>SLIDE FILM</span></div><div class="compare-frame"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">실물 필름 사진</div><div class="slot-note">동일 이미지의 결과물 삽입</div></div></div></div><div class="compare-bottom">손에 남는 필름 <span>↗</span></div></div>
     </div>
-    <div class="transform-statement"><strong>FILE → FILM</strong><p>사진 파일이 실물 필름으로 바뀌는 차이.<br>최종 촬영본을 받으면 같은 장면의 전후를 이곳에 보여드립니다.</p></div>
+    <div class="transform-statement"><strong>ONE SCENE.<br>TWO FORMS.</strong><p>이 비교에는 같은 사진의 원본과 실제 제작 결과물을 사용합니다.<br>고객 촬영본 수령 후 두 이미지를 교체합니다.</p></div>
   </section>
 
   <section class="section dark light">
     <div class="section-kicker">03 — A MOMENT IN THE LIGHT</div><div class="section-id">04 / 09</div>
-    <h2>빛에 비춰보면,<br>필름 속 이미지가 드러납니다.</h2>
-    <p class="lead">빛을 통과하는 슬라이드 필름의 색과 디테일.<br>실제 제품 촬영본으로 결과물을 보여드릴 공간입니다.</p>
+    <h2>빛 앞에 들어 올리면,<br>기억이 다시 보입니다.</h2>
+    <p class="lead">손에 쥔 작은 필름을 빛에 비춰보는 순간.<br>익숙한 장면을 조금 더 천천히 바라보게 됩니다.</p>
     <div class="light-stage" aria-hidden="true"><div class="light-halo"></div><div class="light-primary"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">메인 투과광 촬영본</div><div class="slot-note">고객 촬영본 반영 예정</div></div></div></div><div class="light-small"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">디테일 컷 01</div></div></div></div><div class="light-small two"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">디테일 컷 02</div></div></div></div></div>
-    <div class="light-caption"><span>필름의 색감과 디테일을 한눈에 볼 수 있도록<br>최종 제품 촬영본을 이곳에 담습니다.</span><span>IMAGE SLOTS / 01–03</span></div>
+    <div class="light-caption"><span>빛을 통과한 전체 장면과 손에 닿는 필름의 디테일.<br>실제 촬영본 3컷으로 결과물을 확인할 수 있게 합니다.</span><span>PHOTO SLOTS / 01–03</span></div>
+  </section>
+
+  <section class="section product">
+    <div class="section-kicker">04 — YOUR SCENE, ON FILM</div><div class="section-id">05 / 09</div>
+    <h2>어떤 필름을 받게 될지,<br>주문 전에 먼저 확인하세요.</h2>
+    <p class="lead muted">제품의 실제 모습과 구성, 선택 옵션을<br>한곳에서 비교할 수 있도록 정리합니다.</p>
+    <div class="product-photo"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 메인 사진</div><div class="slot-note">최종 고해상도 촬영본 교체</div></div></div><div class="smalls"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 디테일 01</div></div></div><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 디테일 02</div></div></div></div></div>
+    <div class="spec-title">PRODUCT GUIDE / 확인된 정보만 기입</div>
+    <div class="spec-grid"><div class="spec-row"><span>제품 구성</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>규격 · 컷 수</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>선택 옵션</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>가격 안내</span><span>고객 자료 수령 후 기입</span></div></div>
+    <p class="spec-footnote">※ 위 정보 영역은 상품 정보가 확인된 후 실제 내용으로 교체됩니다.</p>
   </section>
 
   <section class="section process">
-    <div class="section-kicker">04 — MADE FOR YOUR SCENE</div><div class="section-id">05 / 09</div>
-    <h2>사진을 보낸 뒤,<br>어떻게 제작되나요?</h2>
-    <p class="lead muted">이미지 파일 접수부터 필름 제작·현상,<br>검수와 배송까지 이어지는 과정입니다.</p>
+    <div class="section-kicker">05 — MADE FOR YOUR SCENE</div><div class="section-id">06 / 09</div>
+    <h2>보내주신 사진은<br>이렇게 필름이 됩니다.</h2>
+    <p class="lead muted">이미지를 받은 뒤 필름에 기록하고 현상해,<br>완성된 결과물을 확인한 다음 전달합니다.</p>
     <div class="process-path">
       <div class="process-step"><div class="step-num">01</div><div><h3>이미지 접수</h3><p>제작할 디지털 이미지 파일을 받습니다.</p></div><div class="step-mark">↗</div></div>
       <div class="process-step"><div class="step-num">02</div><div><h3>필름 제작</h3><p>이미지를 실제 슬라이드 필름에 기록합니다.</p></div><div class="step-mark">□</div></div>
@@ -455,51 +504,36 @@
       <div class="process-step"><div class="step-num">04</div><div><h3>결과물 검수</h3><p>완성된 실물 결과물을 확인합니다.</p></div><div class="step-mark">✓</div></div>
       <div class="process-step"><div class="step-num">05</div><div><h3>안전 포장·배송</h3><p>완성된 필름을 포장해 전달합니다.</p></div><div class="step-mark">→</div></div>
     </div>
-    <div class="process-footer"><span class="big-arrow">↗</span><p>사진 파일을 보내는 것으로 시작해<br>실물 필름을 받아보는 것으로 완성됩니다.</p></div>
+    <div class="process-footer"><span class="big-arrow">↗</span><p>화면 속 한 장면이<br>손에 닿는 결과물이 되는 과정입니다.</p></div>
   </section>
-
-  <section class="section product">
-    <div class="section-kicker">05 — YOUR SCENE, ON FILM</div><div class="section-id">06 / 09</div>
-    <h2>주문 전, 필름의 모습과<br>상품 구성을 확인하세요.</h2>
-    <p class="lead muted">실제 제품 사진과 구성·규격·옵션을<br>최종 자료가 확인되는 대로 이곳에 정리합니다.</p>
-    <div class="product-photo"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 메인 사진</div><div class="slot-note">최종 고해상도 촬영본 교체</div></div></div><div class="smalls"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 디테일 01</div></div></div><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">제품 디테일 02</div></div></div></div></div>
-    <div class="spec-title">PRODUCT INFORMATION / FINAL DATA PENDING</div>
-    <div class="spec-grid"><div class="spec-row"><span>제품 구성</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>규격 · 컷 수</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>선택 옵션</span><span>고객 자료 수령 후 기입</span></div><div class="spec-row"><span>가격 안내</span><span>고객 자료 수령 후 기입</span></div></div>
-    <p class="spec-footnote">※ 위 정보 영역은 상품 정보가 확인된 후 실제 내용으로 교체됩니다.</p>
-  </section>
-
   <section class="section order">
-    <div class="section-kicker">06 — FROM YOUR PHOTO TO DELIVERY</div><div class="section-id">07 / 09</div>
-    <h2>주문은 이렇게<br>진행됩니다.</h2>
-    <p class="lead muted">옵션을 선택하고 사진 파일을 준비하면<br>제작과 배송까지 차례로 이어집니다.</p>
+    <div class="section-kicker">06 — READY TO ORDER</div><div class="section-id">07 / 09</div>
+    <h2>마음에 둔 장면이 있다면,<br>이제 주문할 차례입니다.</h2>
+    <p class="lead muted">상품 정보를 확인하고 옵션을 선택한 뒤,<br>제작할 사진 파일을 준비해 주세요.</p>
     <div class="order-flow">
-      <div class="order-card"><div class="index">01</div><div><h3>옵션 선택</h3><p>구매할 상품 옵션을 선택합니다.</p></div></div>
-      <div class="order-card"><div class="index">02</div><div><h3>이미지 준비</h3><p>필름으로 남길 이미지 파일을 준비합니다.</p></div></div>
-      <div class="order-card"><div class="index">03</div><div><h3>파일 전달</h3><p>안내된 방법에 따라 이미지를 전달합니다.</p></div></div>
-      <div class="order-card"><div class="index">04</div><div><h3>제작·현상</h3><p>이미지가 실제 필름으로 제작됩니다.</p></div></div>
-      <div class="order-card wide"><div class="index">05</div><div><h3>완성품 배송</h3><p>검수 후 실물 필름을 안전하게 포장해 전달합니다.</p></div></div>
+      <div class="order-card"><div class="index">01</div><div><h3>상품 구성·옵션 확인</h3><p>원하는 구성과 선택 가능한 옵션을 확인합니다.</p></div></div>
+      <div class="order-card"><div class="index">02</div><div><h3>스마트스토어에서 주문</h3><p>상품 옵션을 선택하고 주문을 완료합니다.</p></div></div>
+      <div class="order-card wide"><div class="index">03</div><div><h3>사진 파일 준비·전달</h3><p>필름으로 남길 사진을 안내된 방법에 따라 보냅니다.</p></div></div>
     </div>
-    <p class="order-tip">정확한 파일 전달 채널·규격은 고객 안내를 받은 뒤 이 섹션에 반영합니다.</p>
+    <p class="order-tip">파일 형식·전달 방법 및 구매 전 상담 채널은<br>판매자 확인 후 정확한 안내로 교체합니다.</p>
   </section>
 
   <section class="section notice">
     <div class="section-kicker">07 — A NOTE BEFORE YOU BEGIN</div><div class="section-id">08 / 09</div>
-    <h2>주문 전 궁금한 점을<br>확인해 보세요.</h2>
-    <p class="lead muted">파일 준비와 전달, 상품 구성과 배송 안내를<br>확인된 정보로 정리해 드립니다.</p>
+    <h2>주문 전에 필요한 답을<br>한곳에서 확인하세요.</h2>
+    <p class="lead muted">사진 파일 조건부터 전달 방법, 배송 안내까지.<br>구매 전 헷갈릴 수 있는 정보를 모았습니다.</p>
     <div class="notice-list">
       <div class="notice-item"><span class="q">Q.</span><div><h3>어떤 이미지 파일을 보낼 수 있나요?</h3><p>최종 파일 형식·권장 규격 확인 후 답변 기입</p></div></div>
       <div class="notice-item"><span class="q">Q.</span><div><h3>이미지는 어디로 전달하나요?</h3><p>최종 접수 채널과 전송 방법 확인 후 답변 기입</p></div></div>
-      <div class="notice-item"><span class="q">Q.</span><div><h3>상품 구성과 옵션은 어떻게 되나요?</h3><p>최종 구성·옵션 자료 확인 후 답변 기입</p></div></div>
-      <div class="notice-item"><span class="q">Q.</span><div><h3>주문 전 알아둘 점은 무엇인가요?</h3><p>고객이 제공한 제작·배송·교환 안내 확인 후 답변 기입</p></div></div>
-      <div class="notice-item"><span class="q">Q.</span><div><h3>결과물은 어떻게 받아보나요?</h3><p>최종 배송 안내 확인 후 답변 기입</p></div></div>
+      <div class="notice-item"><span class="q">Q.</span><div><h3>제작·배송과 교환 안내는 어떻게 되나요?</h3><p>판매자 제공 안내 및 스마트스토어 정책 확인 후 답변 기입</p></div></div>
     </div>
     <div class="notice-disclaimer"><div class="eyebrow">NOTICE</div><p>파일 전달·상품 구성·배송 안내는<br>확인된 정보만 정확하게 담겠습니다.</p></div>
   </section>
 
   <section class="section dark closing">
     <div class="eyebrow">FOR THE MOMENTS YOU RETURN TO</div>
-    <h2>간직할 사진을 골라,<br>실제 필름으로 남겨보세요.</h2>
-    <p class="lead">옵션과 파일 안내를 확인한 뒤, 제작할 사진을 준비해 주세요.</p>
+    <h2>오래 마음에 남는 장면을,<br>손에 닿는 필름으로.</h2>
+    <p class="lead">사진을 골랐다면 상품 옵션을 확인하고<br>스마트스토어에서 주문해 주세요.</p>
     <div class="closing-visual" aria-hidden="true"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">최종 클로징 사진</div><div class="slot-note">고객 촬영본 수령 후 반영</div></div></div></div>
     <div class="closing-bottom"><span>SLIDE FILM SERVICE</span><span>END / 09</span></div>
   </section>
