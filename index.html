@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-<title>슬라이드 필름 제작 · 고객 검토용 디자인 시안 v03</title>
+<title>슬라이드 필름 제작 · 고객 검토용 디자인 시안 v04</title>
   <style>
     :root { --ink:#111318; --ivory:#f7f4ee; --paper:#fffefa; --line:#d9d8d3; --mute:#6c6d6d; --accent:#d85b45; --light:#fff3d6; }
     * { box-sizing:border-box; }
@@ -354,6 +354,44 @@
     .closing-visual { bottom:105px; }
     .closing-bottom { left:72px; right:72px; font-size:18px; }
 
+    /* v04 — 서비스 구조가 첫눈에 보이는 비주얼과 리듬감 있는 구매 동선. */
+    .hero-display { top:710px; }
+    .hero-glow { left:53%; top:44%; width:780px; height:700px; }
+    .hero-input { position:absolute; z-index:1; left:70px; top:245px; width:330px; height:390px; padding:20px; background:#fff9ee; border:1px solid #bd9b7e; transform:rotate(-8deg); box-shadow:18px 25px 48px #9c745b55; }
+    .hero-input-head,.hero-input-foot { display:flex; justify-content:space-between; align-items:center; color:#806756; font-size:17px; font-weight:700; letter-spacing:.12em; }
+    .hero-input-screen { position:relative; display:grid; place-items:center; overflow:hidden; height:284px; margin:18px 0 15px; border:1px solid #c7ac92; background:linear-gradient(155deg,#f6d7af,#edb989 50%,#9c705a); }
+    .hero-input-screen:before { content:""; position:absolute; top:45px; right:42px; width:128px; height:128px; border-radius:50%; background:#fff3d0cc; filter:blur(5px); }
+    .hero-input-screen:after { content:""; position:absolute; left:-30px; right:-30px; bottom:-78px; height:215px; border-radius:50% 50% 0 0; background:#9e6f5e77; transform:rotate(-10deg); }
+    .hero-input-screen span { position:relative; z-index:1; padding:13px 18px; border:1px solid #fff6e6; background:#fff8edcf; color:#654d3f; font-size:18px; font-weight:700; }
+    .hero-transfer { position:absolute; z-index:3; left:340px; top:430px; display:grid; place-items:center; width:142px; height:78px; border:1px solid #d9ab80; border-radius:60px; background:#fff7e9; color:#a55b3e; box-shadow:0 13px 33px #8f634555; }
+    .hero-transfer strong { font-family:Georgia,serif; font-size:48px; line-height:1; font-weight:400; }
+    .hero-film { z-index:2; top:145px; left:432px; width:350px; height:540px; padding:48px 26px; transform:rotate(6deg); }
+    .hero-film .slot-inner { min-width:0; width:90%; padding:18px 12px; }
+    .hero-film .slot-label { font-size:20px; }
+    .hero-film .slot-note { font-size:17px; }
+    .hero-display-caption { top:765px; }
+    .hero-route { display:flex; align-items:center; gap:12px; font-weight:650; letter-spacing:-.02em; }
+    .hero-route i { color:#aa6249; font-family:Georgia,serif; font-size:29px; font-style:normal; }
+    .concept { background:radial-gradient(circle at 55% 16%,#86614d,#654535 57%,#523a30); color:#fff8eb; }
+    .concept .section-kicker { color:#f4c6a0; }
+    .concept h2 span { color:#ffd0a2; }
+    .concept .lead { color:#efded0; }
+    .concept .difference-card { color:#463229; background:#fff2e1; border-color:#ddc2a7; }
+    .concept .difference-card.active { background:#f6d2af; border-color:#f2c196; }
+    .concept-quote { border-color:#bd9b84; }
+    .concept-quote span { color:#f8c396; }
+    .concept-quote p { color:#fff4e5; }
+    .concept-bottom { border-color:#a48370; color:#e7cdb9; }
+    .order-flow { grid-template-columns:1fr; gap:0; margin-top:90px; border-top:1px solid #c9ad90; }
+    .order-card,.order-card.wide { grid-column:auto; min-height:230px; padding:26px 22px; display:grid; grid-template-columns:105px 1fr; gap:18px; align-items:center; justify-content:initial; border:0; border-bottom:1px solid #c9ad90; background:transparent; color:#352820; }
+    .order-card .index { font-size:64px; }
+    .order-card.wide .index { color:#b86d4b; }
+    .order-card h3 { font-size:35px; }
+    .order-card p,.order-card.wide p { margin-top:10px; font-size:26px; color:#6d5849; }
+    .order-card:after { content:"→"; position:absolute; right:26px; top:50%; transform:translateY(-50%); color:#a7674c; font-family:Georgia,serif; font-size:38px; }
+    .order-card.wide:after { content:"✓"; }
+    .order-tip { margin-top:50px; }
+
     @media(max-width:860px){ .page { margin:0; } }
     @media print { html { background:white; } .page { margin:0; } }
   </style>
@@ -365,8 +403,14 @@
     <div class="eyebrow">A SCENE WORTH KEEPING</div>
     <h1>사진 파일을,<br><em>실제 슬라이드<br>필름으로.</em></h1>
     <p class="lead">보내주신 사진을 실제 슬라이드 필름에 기록합니다.<br>아날로그 현상을 거쳐 실물 필름으로 전해드립니다.</p>
-    <div class="hero-display" aria-hidden="true"><div class="hero-glow"></div><div class="hero-film"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">HERO IMAGE / 01</div><div class="slot-note">최종 제품 촬영본 적용 예정</div></div></div></div><div class="hero-display-caption"><span>THE MOMENT, HELD IN LIGHT</span><span>01 / ARCHIVE</span></div></div>
-    <div class="hero-foot"><span>화면 속 사진을 실물 필름으로 간직하는 방법</span><strong>01 / 09</strong></div>
+    <div class="hero-display" aria-hidden="true">
+      <div class="hero-glow"></div>
+      <div class="hero-input"><div class="hero-input-head"><span>01 / FILE</span><span>YOUR PHOTO</span></div><div class="hero-input-screen"><span>보내주신 사진 파일</span></div><div class="hero-input-foot"><span>디지털 이미지</span><span>→</span></div></div>
+      <div class="hero-transfer"><strong>→</strong></div>
+      <div class="hero-film"><div class="slot"><div class="slot-inner"><div class="slot-icon">＋</div><div class="slot-label">02 / SLIDE FILM</div><div class="slot-note">최종 제품 사진 적용 예정</div></div></div></div>
+      <div class="hero-display-caption"><span>FROM DIGITAL IMAGE</span><span>TO PHYSICAL FILM</span></div>
+    </div>
+    <div class="hero-foot"><div class="hero-route"><span>사진 파일</span><i>→</i><span>필름 기록·현상</span><i>→</i><span>실물 전달</span></div><strong>01 / 09</strong></div>
   </section>
 
   <section class="section concept">
